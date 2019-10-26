@@ -21,41 +21,43 @@ Donors are notified of matching requests
 Donors go the app to accept request
 App picks matching donor and informs donor
 App provides donor info to requester and notifies donor is on route
+Filter donors by criteria other than location. More analysis. these are brownie points
 
 
 Data Entities
 
 ### Donor
     - Name
-    - Address
     - Blood Group
-    - State
-    - LGA
+    - Address
     - Phone
     - Email
     - Lab Document 
+    - Password
 
 ### Requester
     - Name
-    - Address
-    - Recipient
-    - Hospital
-    - State
-    - LGA
     - Phone
     - Email
-
-### Recipient
-    - Name
-    - Address
-    - Blood Group
-    - State
-    - LGA
-    - Phone
-    - Email
+    - Password
 
 ### Hospital
     - Name
     - Address
-    - State
+    - Address
+
+### Request
+    - Requester
+    - Blood Group
+    - Hospital
+    - Status
+
+### Address
+    - Street
     - LGA
+    - State
+
+### Notification
+    - Donor
+    - Request
+    - Status
