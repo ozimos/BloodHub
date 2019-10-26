@@ -484,7 +484,11 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
     return createEmailClientAndSend(body);
 }
 /**
+<<<<<<< HEAD
  * send an otp to complete a blood request
+=======
+ * send a user card payment done
+>>>>>>> 1dd4d24654a7af644b692f8d43b1ce89b8a8fa04
  * @param {object} user
  */
 exports.sendRequestOTPEmail = (user) => {
