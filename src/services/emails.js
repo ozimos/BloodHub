@@ -453,17 +453,16 @@ exports.emailBody = (partialBody) => {
 exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
 
 
-    let email;
-    let subject
+    let email = user.email;
+    let subject =  "BloodHub -- New blood donation request"
     let token = utils.generateOTP(4);
     let partialBody = ''
-    let r;
 
     partialBody += `
     <tr>
     <td>
      <h4>   
-     Dear ${r}
+     Dear ${user.name}
      </h4>
 </td>
 </tr>
@@ -485,22 +484,21 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
 }
 /**
  * send an otp to complete a blood request
- * @param {object} user
+ * @param {object} donor user object
  */
 exports.sendRequestOTPEmail = (user) => {
 
 
-    let email;
-    let subject
+    let email = user.email;
+    let subject = "Blood request completion"
     let token = utils.generateOTP(4);
     let partialBody = ''
-    let r;
 
     partialBody += `
     <tr>
     <td>
      <h4>   
-     Hello ${r}
+     Hello ${user.name}
      </h4>
 </td>
 </tr>
