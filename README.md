@@ -33,11 +33,13 @@ Data Entities
     - Phone
     - Email
     - Lab Document 
+    - Password
 
 ### Requester
     - Name
     - Phone
     - Email
+    - Password
 
 ### Hospital
     - Name
@@ -54,3 +56,8 @@ Data Entities
     - Street
     - LGA
     - State
+
+### Notification
+    - Donor
+    - Request
+    - Status
