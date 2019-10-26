@@ -43,8 +43,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="328">
               <caret line="70" column="7" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+=======
+            <state relative-caret-position="-995">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+>>>>>>> 36bdeb4a12b4ab80bf38f22dc25044d6826ff5c0
             </state>
           </provider>
         </entry>
@@ -52,7 +57,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="275">
+=======
+            <state relative-caret-position="292">
+>>>>>>> 36bdeb4a12b4ab80bf38f22dc25044d6826ff5c0
               <caret line="319" selection-start-line="319" selection-end-line="319" />
             </state>
           </provider>
@@ -226,7 +235,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="1466000" />
+=======
+    <option name="totallyTimeSpent" value="1397000" />
+>>>>>>> 36bdeb4a12b4ab80bf38f22dc25044d6826ff5c0
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="830" extended-state="6" />
@@ -311,15 +324,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="275">
+=======
+        <state relative-caret-position="292">
+>>>>>>> 36bdeb4a12b4ab80bf38f22dc25044d6826ff5c0
           <caret line="319" selection-start-line="319" selection-end-line="319" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="328">
           <caret line="70" column="7" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+=======
+        <state relative-caret-position="-995">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+>>>>>>> 36bdeb4a12b4ab80bf38f22dc25044d6826ff5c0
         </state>
       </provider>
     </entry>
