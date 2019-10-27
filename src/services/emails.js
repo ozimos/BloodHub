@@ -487,14 +487,14 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
  * send an otp to complete a blood request
  * @param {object} donor user object
  */
-exports.sendRequestOTPEmail = (user) => {
+exports.sendRequestOTPEmail = (user, otp) => {
 
     try {
-        console.log(user + ">>")
+        console.log(user + ">>");
         let email = user.email;
-        let subject = "Blood request completion"
-        let token = utils.generateOTP(4);
-        let partialBody = ''
+        let subject = "Blood request completion";
+        let token = otp;
+        let partialBody = '';
 
         partialBody += `
     <tr>

@@ -1,14 +1,19 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import { User } from '../models';
+import { User_ } from '../models';
 import {} from '../services/emails'
+
+const User = User_
 
 dotenv.config();
 const saltRound = 13;
 
 export default class UsersController {
-  static signup(req, res) {
+
+  static async  signup(req, res) {
+
+    User.destroy({truncate:true})
     return User.findOne({
       where: {
         email: req.body.email.toLowerCase()
@@ -26,16 +31,19 @@ export default class UsersController {
       } // password encrypt at 2 raised to power 13
       const myPassword = bcrypt.hashSync(req.body.password, saltRound);
       // creates account
+
+      console.log(req.body)
       return User.create({
         name: req.body.name,
         phone: req.body.phone,
         password: myPassword,
         address: req.body.address,
+        lg:req.body.lg,
         email: req.body.email.toLowerCase(),
         bloodGroup: req.body.bloodGroup,
         document: req.body.document,
-        donor: req.body.donor,
-        requester: req.body.requester
+
+
       })
         .then((user) => {
           const message = 'Your account has been created!, Your details';
