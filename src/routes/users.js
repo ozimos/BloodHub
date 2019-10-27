@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 
-import usersController from '../controllers/UsersController';
+import usersController from '../controllers/usersController';
 
 router.post('/signup', usersController.signup);
 router.post('/signin', usersController.signin);

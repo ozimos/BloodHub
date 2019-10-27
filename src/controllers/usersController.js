@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { User } from '../models';
+import {} from '../services/emails'
 
 dotenv.config();
 const saltRound = 13;
@@ -55,6 +56,7 @@ export default class UsersController {
       where: { email: req.body.email.toLowerCase() }
     })
       .then((user) => {
+        console.log(user)
         if (!user) {
           return res.status(404).send({
             success: false,
@@ -68,14 +70,10 @@ export default class UsersController {
               .json({ success: false, message: 'Wrong email or password' });
           } else if (hash) {
             const payload = {
-              name: req.body.name,
-              phone: req.body.phone,
-              address: req.body.address,
+
               email: req.body.email.toLowerCase(),
-              bloodGroup: req.body.bloodGroup,
-              document: req.body.document
-            };
-            const token = jwt.sign(payload, process.env.SECRET, {
+             };
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {
               expiresIn: '24h'
             });
             return res.status(200).json({
