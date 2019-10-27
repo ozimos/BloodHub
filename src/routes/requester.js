@@ -1,10 +1,9 @@
 
-let controllers = require('../controllers/requester');
+// import requesterController from '../controllers/requester';
 
-let router = require('express').Router();
-
-
-router.get('/', ()=> {});
+// let router = require('express').Router();
 
 
-module.exports = router
+// router.get('/', requesterController.signup);
+
+// module.exports = router
