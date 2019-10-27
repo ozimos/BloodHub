@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     requester: DataTypes.INTEGER,
     blood_group: DataTypes.STRING,
     hospital: DataTypes.INTEGER,
-    status: DataTypes.BOOLEAN
+    status: DataTypes.BOOLEAN,
+    donor_match: DataTypes.INTEGER
   }, {});
   Bloodrequest.associate = function(models) {
     // associations can be defined here

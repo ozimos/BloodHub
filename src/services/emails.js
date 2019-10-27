@@ -453,7 +453,7 @@ const emailBody = (partialBody) => {
 
 exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
 
-
+console.log(user)
     let email = user.email;
     let subject = "BloodHub -- New blood donation request"
     let token = utils.generateOTP(4);
@@ -473,28 +473,28 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
           <span>
               <p style="margin-bottom: 2em;line-height: 26px;font-size: 14px;">
               
-            A new blood request has been matched for your blood group location. <br>
+            A new blood request has been matched for your blood group and location. <br>
             Token: <strong>Please login into the app to review this request</strong>
         </p>
           </span>
       </td>
     </tr>`;
 
-    const body = this.emailBody(partialBody);
-    return createEmailClientAndSend(body);
+    const body = emailBody(partialBody);
+
+    return createEmailClientAndSend(email,body, subject);
 }
 /**
  * send an otp to complete a blood request
  * @param {object} donor user object
  */
-exports.sendRequestOTPEmail = (user) => {
-
+exports.sendRequestOTPEmail = (user, otp) => {
     try {
-        console.log(user + ">>")
+        console.log(user + ">>");
         let email = user.email;
-        let subject = "Blood request completion"
-        let token = utils.generateOTP(4);
-        let partialBody = ''
+        let subject = "Blood request completion";
+        let token = otp;
+        let partialBody = '';
 
         partialBody += `
     <tr>

@@ -20,6 +20,9 @@ module.exports = {
       status: {
         type: Sequelize.BOOLEAN
       },
+      donor_match: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,5 +1,6 @@
-import { User } from '../models';
+import { User_ } from '../models';
 
+const User = User_;
 function userValid(req, res, next) {
   User.findOne({
     where: {
