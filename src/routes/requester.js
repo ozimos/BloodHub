@@ -1,9 +1,11 @@
 
-// import requesterController from '../controllers/requester';
+import requesterController from '../controllers/requesterController';
 
-// let router = require('express').Router();
+let router = require('express').Router();
 
 
-// router.get('/', requesterController.signup);
+router.post('/', requesterController.createRequester);
+router.post('/blood-request', requesterController.postBloodRequest);
+router.get('/', requesterController.fetchrequesters);
 
-// module.exports = router
+module.exports = router

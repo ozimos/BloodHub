@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { User } from '../models';
+import {} from '../services/emails'
 
 dotenv.config();
 const saltRound = 13;
@@ -56,7 +57,15 @@ export default class UsersController {
     User.findOne({
       where: { email: req.body.email.toLowerCase() }
     })
-      .then(user => {
+      .then((user) => {
+        console.log(user)
+        if (!user) {
+          return res.status(404).send({
+            success: false,
+            message: 'Wrong email or password'
+          });
+        }
+
         bcrypt.compare(req.body.password, user.password, (err, hash) => {
           if (!hash) {
             return res
@@ -64,11 +73,11 @@ export default class UsersController {
               .json({ success: false, message: 'Wrong email or password' });
           } else if (hash) {
             const payload = {
-              name: req.body.name,
-              phone: req.body.phone,
-              email: req.body.email.toLowerCase()
-            };
-            const token = jwt.sign(payload, process.env.SECRET, {
+
+              email: req.body.email.toLowerCase(),
+             };
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {
+
               expiresIn: '24h'
             });
             return res.status(200).json({

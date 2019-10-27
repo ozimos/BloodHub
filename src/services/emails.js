@@ -1,12 +1,13 @@
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
-const utils = require('util/utils')
+const smtp = require('nodemailer-smtp-transport')
+const utils = require('../../util/utils')
 
 /**
  * return full email body
  * @param {string} partialBody
  */
-exports.emailBody = (partialBody) => {
+const emailBody = (partialBody) => {
     const body = `
   <!DOCTYPE html>
       <html lang="en">
@@ -454,7 +455,7 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
 
 
     let email = user.email;
-    let subject =  "BloodHub -- New blood donation request"
+    let subject = "BloodHub -- New blood donation request"
     let token = utils.generateOTP(4);
     let partialBody = ''
 
@@ -488,17 +489,18 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
  */
 exports.sendRequestOTPEmail = (user) => {
 
+    try {
+        console.log(user + ">>")
+        let email = user.email;
+        let subject = "Blood request completion"
+        let token = utils.generateOTP(4);
+        let partialBody = ''
 
-    let email = user.email;
-    let subject = "Blood request completion"
-    let token = utils.generateOTP(4);
-    let partialBody = ''
-
-    partialBody += `
+        partialBody += `
     <tr>
     <td>
      <h4>   
-     Hello ${user.name}
+     Hello ${user.firstName} ${user.lastName}
      </h4>
 </td>
 </tr>
@@ -515,8 +517,11 @@ exports.sendRequestOTPEmail = (user) => {
       </td>
     </tr>`;
 
-    const body = this.emailBody(partialBody);
-    return createEmailClientAndSend(body);
+        const body = emailBody(partialBody);
+        return createEmailClientAndSend(email, body, subject);
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 function createEmailClientAndSend(email, body, subject) {
@@ -524,7 +529,7 @@ function createEmailClientAndSend(email, body, subject) {
     if (email == null || body == null || subject == null) {
         return {status: 'failed', err: 'the required parameters were not supplied'};
     }
-
+/*
     const transport = nodemailer.createTransport(
         mg({
             auth: {
@@ -532,6 +537,17 @@ function createEmailClientAndSend(email, body, subject) {
                 domain: process.env.MAILGUN_DOMAIN
             }
         })
+    );*/
+ const transport = nodemailer.createTransport(smtp(
+     {
+         service: 'gmail',
+         auth: {
+             user: 's.stackng@gmail.com',
+             pass: '0158101581@',
+             port: 465,
+             secure: true
+         }
+     })
     );
 
     // setup email data with unicode symbols
@@ -542,13 +558,15 @@ function createEmailClientAndSend(email, body, subject) {
         html: body
     };
 
-    transport.sendMail(mailOptions, (error, info) => {
+    console.log('here')
+  let o =   transport.sendMail(mailOptions, (error, info) => {
         if (error) {
-            log(error)
+            console.log(error)
         } else {
-            log(error, info.response);
+            console.log( error, info.response);
         }
     });
+
 
     return {status: 'success', message: 'email sent'}
 }
