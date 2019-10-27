@@ -32,7 +32,9 @@ export default class UsersController {
         address: req.body.address,
         email: req.body.email.toLowerCase(),
         bloodGroup: req.body.bloodGroup,
-        document: req.body.document
+        document: req.body.document,
+        donor: req.body.donor,
+        requester: req.body.requester
       })
         .then((user) => {
           const message = 'Your account has been created!, Your details';
@@ -54,13 +56,7 @@ export default class UsersController {
     User.findOne({
       where: { email: req.body.email.toLowerCase() }
     })
-      .then((user) => {
-        if (!user) {
-          return res.status(404).send({
-            success: false,
-            message: 'Wrong email or password'
-          });
-        }
+      .then(user => {
         bcrypt.compare(req.body.password, user.password, (err, hash) => {
           if (!hash) {
             return res
@@ -70,10 +66,7 @@ export default class UsersController {
             const payload = {
               name: req.body.name,
               phone: req.body.phone,
-              address: req.body.address,
-              email: req.body.email.toLowerCase(),
-              bloodGroup: req.body.bloodGroup,
-              document: req.body.document
+              email: req.body.email.toLowerCase()
             };
             const token = jwt.sign(payload, process.env.SECRET, {
               expiresIn: '24h'
@@ -85,12 +78,6 @@ export default class UsersController {
               user
             });
           }
-        });
-      })
-      .catch((error) => {
-        res.status(400).send({
-          success: false,
-          error
         });
       });
   }
