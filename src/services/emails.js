@@ -473,7 +473,7 @@ console.log(user)
           <span>
               <p style="margin-bottom: 2em;line-height: 26px;font-size: 14px;">
               
-            A new blood request has been matched for your blood group location. <br>
+            A new blood request has been matched for your blood group and location. <br>
             Token: <strong>Please login into the app to review this request</strong>
         </p>
           </span>
