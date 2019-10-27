@@ -453,7 +453,7 @@ const emailBody = (partialBody) => {
 
 exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
 
-
+console.log(user)
     let email = user.email;
     let subject = "BloodHub -- New blood donation request"
     let token = utils.generateOTP(4);
@@ -480,15 +480,15 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
       </td>
     </tr>`;
 
-    const body = this.emailBody(partialBody);
-    return createEmailClientAndSend(body);
+    const body = emailBody(partialBody);
+
+    return createEmailClientAndSend(email,body, subject);
 }
 /**
  * send an otp to complete a blood request
  * @param {object} donor user object
  */
 exports.sendRequestOTPEmail = (user, otp) => {
-
     try {
         console.log(user + ">>");
         let email = user.email;

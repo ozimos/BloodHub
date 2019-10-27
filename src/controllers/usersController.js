@@ -13,7 +13,7 @@ export default class UsersController {
 
   static async  signup(req, res) {
 
-    User.destroy({truncate:true})
+
     return User.findOne({
       where: {
         email: req.body.email.toLowerCase()

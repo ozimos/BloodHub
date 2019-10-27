@@ -117,13 +117,24 @@ export default {
             }
         })
 
-        console.log(donorsInBloodGroupAndLg [0])
+
 
         //mail users
         for (let user of donorsInBloodGroupAndLg) {
 
-         email.sendRequestNewBloodRequestNotificationEmail(user)
+         email.sendRequestNewBloodRequestNotificationEmail(user.dataValues)
         }
+
+        if(!donorsInBloodGroupAndLg [0]){
+            res.send({
+                status:"failed",
+                message:"No donor found"
+            })
+        }
+        res.send({
+            status:"success",
+            message:"blood request sent out"
+        })
     }
 }
 
@@ -151,7 +162,7 @@ function canMatchBlood(group) {
         case 'O+':
             return ['O+', 'O-'];
             break;
-        case 'O+':
+        case 'O-':
             return ['O-'];
             break;
 
