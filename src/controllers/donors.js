@@ -1,13 +1,8 @@
-
-import dotenv from 'dotenv';
-import { Donor } from '../models';
+import dotenv from "dotenv";
+import { Donor } from "../models";
 
 dotenv.config();
 
 export default class DonorController {
-  static respond(req, res) {
-    
-
-  }
-
+  static respond(req, res) {}
 }
