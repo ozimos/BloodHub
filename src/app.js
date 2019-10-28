@@ -19,7 +19,7 @@ const corsOptionsDelegate = function(req, callback) {
   }
   callback(null, corsOptions);
 };
-
+app.use(cors(corsOptionsDelegate));
 app.options("*", cors(corsOptionsDelegate));
 
 const port = process.env.PORT;

@@ -26,28 +26,32 @@ export default class UsersController {
       } // password encrypt at 2 raised to power 13
       const myPassword = bcrypt.hashSync(req.body.password, saltRound);
       // creates account
-      return Donor.create({
-        user: {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          phone: req.body.phone,
-          password: myPassword,
-          street: req.body.street,
-          lg: req.body.lg,
-          state: req.body.state,
-          email: req.body.email.toLowerCase()
+      return Donor.create(
+        {
+          user: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phone: req.body.phone,
+            password: myPassword,
+            street: req.body.street,
+            lg: req.body.lg,
+            state: req.body.state,
+            email: req.body.email.toLowerCase()
+          },
+          bloodGroup: req.body.bloodGroup,
+          document: req.body.document
         },
-        bloodGroup: req.body.bloodGroup,
-        document: req.body.document
-      })
-        .then(donor => {
-          const message = "Your account has been created!, Your details";
+        {
+          include: [{ association: "user" }]
+        }
+      )
+        .then(({ user }) => {
           return res.status(201).json({
-            message,
+            message: "Your account has been created!, Your details",
             user: {
-              firstName: donor.user.firstName,
-              lastName: donor.user.lastName,
-              email: donor.user.email
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email
             }
           });
         })
