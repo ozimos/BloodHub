@@ -8,23 +8,27 @@ import {} from '../services/emails'
 const hospitalSeed = [
     {
         name: "St Charles Hospital",
-        address: "3 oshinkalu nbsp close off randle avenue",
-        lg: "surulere"
+        street: "3 oshinkalu nbsp close off randle avenue",
+        lg: "surulere",
+        state: "Lagos",
     },
     {
         name: "Citizen Medical Centre",
-        address: "86 Norman Williams Street, Ikoyi, Lagos Nigeria",
-        lg: "obalende"
+        street: "86 Norman Williams Street, Ikoyi",
+        lg: "obalende",
+        state: "Lagos",
     },
     {
         name: "Family health Hospital",
-        address: "9 Akobi Crescent Off Ishaga Road, Surulere, Lagos Nigeria",
-        lg: "surulere"
+        street: "9 Akobi Crescent Off Ishaga Road, Surulere",
+        lg: "surulere",
+        state: "Lagos",
     },
     {
         name: "First Consultants Medical Centre",
-        address: "6/24 Ikoyi Road, Ikoyi, Obalende, Lagos, Nigeria",
-        lg: "obalende"
+        street: "6/24 Ikoyi Road, Ikoyi, Obalende",
+        lg: "obalende",
+        state: "Lagos",
     }
 ]
 
