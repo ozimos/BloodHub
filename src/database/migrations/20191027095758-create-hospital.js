@@ -11,10 +11,13 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      address: {
+      street: {
         type: Sequelize.STRING
       },
       lg: {
+        type: Sequelize.STRING
+      },
+      state: {
         type: Sequelize.STRING
       },
       createdAt: {

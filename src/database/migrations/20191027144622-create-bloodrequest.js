@@ -8,17 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      requester: {
+      requesterId: {
         type: Sequelize.INTEGER
       },
-      blood_group: {
-        type: Sequelize.STRING
+      bloodGroup: {
+        type: Sequelize.ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')
       },
-      hospital: {
+      hospitalId: {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.ENUM('pending', 'matched', 'reprocessing', 'failed', 'success')
       },
       createdAt: {
         allowNull: false,
