@@ -5,5 +5,5 @@ import usersController from '../controllers/usersController';
 
 
 router.post('/signup', usersController.signup);
-router.post('/signin', userValid, usersController.signin);
+router.post('/signin', usersController.signin);
 module.exports = router;
