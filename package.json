@@ -27,17 +27,29 @@
     "@babel/node": "^7.6.3",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
-    "nodemon": "^1.19.4"
+    "cross-env": "^6.0.3",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon --exec babel-node src/app.js",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --watch",
+    "start:dev": "nodemon --exec babel-node src/server.js",
+    "migrate": "npx sequelize db:migrate && npx sequelize db:seed:all",
+    "migrate:reset": "npx sequelize db:migrate:undo:all && npm run migrate",
     "build": "babel src --out-dir dist",
-    "start": "node dist/app.js"
+    "start": "node dist/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ozimos/BloodHub.git"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "",
   "license": "ISC",

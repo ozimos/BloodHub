@@ -1,8 +1,9 @@
-import { User, Hospital } from "../models";
+import db from "../models";
 import emailServices from "../services/emails";
 
 import utils from "../../util/utils";
 
+const { User, Hospital } = db;
 export default {
   createRequester: async (req, res) => {
     const reqArgs = ["firstName", "lastName", "email"];

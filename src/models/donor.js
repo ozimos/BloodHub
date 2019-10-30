@@ -1,17 +1,19 @@
-"use strict";
-module.exports = (sequelize, DataTypes) => {
-  const Donor = sequelize.define(
-    "Donor",
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
+  class Donor extends Model {
+    static associate(models) {
+      this.belongsTo(models.User, { as: "user", foreignKey: "userId" });
+    }
+  }
+
+  Donor.init(
     {
       userId: DataTypes.INTEGER,
       document: DataTypes.STRING,
       bloodGroup: DataTypes.STRING
     },
-    {}
+    { sequelize, modelName: "Donor" }
   );
-  Donor.associate = function(models) {
-    // associations can be defined here
-    Donor.belongsTo(models.User, {as: 'user'});
-  };
+
   return Donor;
 };

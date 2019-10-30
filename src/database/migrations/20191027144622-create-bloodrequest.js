@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bloodrequests', {
+    return queryInterface.createTable("Bloodrequests", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,25 +12,33 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       bloodGroup: {
-        type: Sequelize.ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')
+        type: Sequelize.ENUM("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
       },
       hospitalId: {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.ENUM('pending', 'matched', 'reprocessing', 'failed', 'success')
+        type: Sequelize.ENUM(
+          "pending",
+          "matched",
+          "reprocessing",
+          "failed",
+          "success"
+        )
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bloodrequests');
+    return queryInterface.dropTable("Bloodrequests");
   }
 };

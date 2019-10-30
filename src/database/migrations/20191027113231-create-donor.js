@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Donors', {
+    return queryInterface.createTable("Donors", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,28 +12,30 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Users'
+            tableName: "Users"
           },
-          key: 'id'
+          key: "id"
         }
       },
       document: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       bloodGroup: {
-        type: Sequelize.ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')
+        type: Sequelize.ENUM("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date()
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Donors');
+    return queryInterface.dropTable("Donors");
   }
 };

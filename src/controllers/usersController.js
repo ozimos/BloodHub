@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { User, Donor } from "../models";
+import db from "../models";
 import {} from "../services/emails";
 
 dotenv.config();
 const saltRound = 13;
-
+const { User, Donor } = db;
 export default class UsersController {
   static signup(req, res) {
     return User.findOne({

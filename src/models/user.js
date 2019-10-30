@@ -1,6 +1,15 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+import { Model } from 'sequelize';
+
+export default (sequelize, DataTypes) => {
+
+  class User extends Model {
+    static associate(models) {
+      this.hasMany(models.Bloodrequest, {foreignKey: 'userId', as: 'requests'})
+      this.hasOne(models.Donor, {foreignKey: 'userId', as: 'donor', onDelete: 'CASCADE'})
+    };
+  }
+
+  User.init({
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
@@ -9,10 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     lg: DataTypes.STRING,
     state: DataTypes.STRING,
     password: DataTypes.STRING,
-  }, {});
-  User.associate = function(models) {
-    // associations can be defined here
-    User.hasMany(models.Bloodrequest)
-  };
+  }, {sequelize, modelName: 'User'});
+
   return User;
 };

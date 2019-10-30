@@ -22,8 +22,6 @@ const corsOptionsDelegate = function(req, callback) {
 app.use(cors(corsOptionsDelegate));
 app.options("*", cors(corsOptionsDelegate));
 
-const port = process.env.PORT;
-
 app.use("/", require("./routes"));
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+export default app

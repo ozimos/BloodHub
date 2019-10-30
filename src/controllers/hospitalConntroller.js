@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { Hospital } from "../models";
+import db from "../models";
 import {} from "../services/emails";
 
+const { Hospital } = db;
 const hospitalSeed = [
   {
     name: "St Charles Hospital",
