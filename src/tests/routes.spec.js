@@ -1,6 +1,6 @@
 import request from "supertest";
 import faker from "faker";
-import app from "../app";
+import {app} from "../app";
 import db from "../models";
 
 const { User } = db;

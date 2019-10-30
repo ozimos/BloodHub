@@ -22,25 +22,21 @@
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/node": "^7.6.3",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/preset-env": "^7.6.3",
-    "faker": "^4.1.0",
+    "@swissquote/crafty-preset-jest": "^1.8.0",
     "cross-env": "^6.0.3",
+    "esm": "^3.2.25",
+    "faker": "^4.1.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
     "supertest": "^4.0.2"
   },
   "scripts": {
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --watch",
-    "start:dev": "nodemon --exec babel-node src/server.js",
+    "test": "cross-env NODE_ENV=test npx jest --testTimeout=10000 --watch",
+    "start:dev": "nodemon src/server.js",
     "migrate": "npx sequelize db:migrate && npx sequelize db:seed:all",
     "migrate:reset": "npx sequelize db:migrate:undo:all && npm run migrate",
-    "build": "babel src --out-dir dist",
-    "start": "node dist/server.js"
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -50,7 +46,11 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
-    ]
+    ],
+    "transformIgnorePatterns": [],
+    "transform": {
+      "\\.m?jsx?$": "@swissquote/crafty-preset-jest/src/esm-transformer"
+    }
   },
   "author": "",
   "license": "ISC",

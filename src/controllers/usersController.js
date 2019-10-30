@@ -14,18 +14,15 @@ export default class UsersController {
         email: req.body.email.toLowerCase()
       }
     }).then(users => {
-      // checks to see if user already exist
       if (users) {
         return res.status(409).json({
           message: "User already exists"
         });
-      } // ensures both entries to password match
+      }
       if (req.body.password !== req.body.verifyPassword) {
-        // passwords must match
         return res.status(400).json({ message: "password did not match" });
       } // password encrypt at 2 raised to power 13
       const myPassword = bcrypt.hashSync(req.body.password, saltRound);
-      // creates account
       return Donor.create(
         {
           user: {
