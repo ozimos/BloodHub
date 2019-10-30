@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import db from "../models";
 import {} from "../services/emails";
 
-dotenv.config();
 const saltRound = 13;
 const { User, Donor } = db;
 export default class UsersController {
@@ -14,18 +13,15 @@ export default class UsersController {
         email: req.body.email.toLowerCase()
       }
     }).then(users => {
-      // checks to see if user already exist
       if (users) {
         return res.status(409).json({
           message: "User already exists"
         });
-      } // ensures both entries to password match
+      }
       if (req.body.password !== req.body.verifyPassword) {
-        // passwords must match
         return res.status(400).json({ message: "password did not match" });
       } // password encrypt at 2 raised to power 13
       const myPassword = bcrypt.hashSync(req.body.password, saltRound);
-      // creates account
       return Donor.create(
         {
           user: {
@@ -65,7 +61,6 @@ export default class UsersController {
     User.findOne({
       where: { email: req.body.email.toLowerCase() }
     }).then(user => {
-      console.log(user);
       if (!user) {
         return res.status(404).send({
           success: false,
