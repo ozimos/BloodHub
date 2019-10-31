@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import {config} from 'dotenv'
+import routes from './routes'
 
 const app = express();
 
@@ -23,6 +24,6 @@ const corsOptionsDelegate = function(req, callback) {
 app.use(cors(corsOptionsDelegate));
 app.options("*", cors(corsOptionsDelegate));
 
-app.use("/", require("./routes"));
+app.use(routes);
 
 export default app

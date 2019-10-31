@@ -451,7 +451,7 @@ const emailBody = (partialBody) => {
  * @returns {{err, status}|{message, status}}
  */
 
-exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
+export const sendRequestNewBloodRequestNotificationEmail = (user) => {
 
 
     let email = user.email;
@@ -487,7 +487,7 @@ exports.sendRequestNewBloodRequestNotificationEmail = (user) => {
  * send an otp to complete a blood request
  * @param {object} donor user object
  */
-exports.sendRequestOTPEmail = (user) => {
+export const sendRequestOTPEmail = (user) => {
 
     try {
         console.log(user + ">>")

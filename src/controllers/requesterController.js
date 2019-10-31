@@ -1,14 +1,14 @@
 import db from "../models";
-import emailServices from "../services/emails";
+import {sendRequestOTPEmail} from "../services/emails";
 
-import utils from "../../util/utils";
+import {validateParameters} from "../../util/utils";
 
 const { User, Hospital } = db;
 export default {
   createRequester: async (req, res) => {
     const reqArgs = ["firstName", "lastName", "email"];
 
-    let userData = utils.validateParameters(reqArgs, req.body, res); //validate parameters]
+    let userData = validateParameters(reqArgs, req.body, res); //validate parameters]
 
     try {
       // await User.destroy({truncate:true})
@@ -26,7 +26,7 @@ export default {
           }
         });
 
-        emailServices.sendRequestOTPEmail(user.dataValues);
+        sendRequestOTPEmail(user.dataValues);
         res.send({
           status: "success",
           message: "Requester created"

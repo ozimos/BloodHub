@@ -2,7 +2,7 @@
 logs
 node_modules/
 dist
-
+.DS_Store
 *.iml
 .gitignore
 *.gitignore

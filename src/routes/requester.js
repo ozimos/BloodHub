@@ -1,11 +1,13 @@
+import {Router} from "express";
 
 import requesterController from '../controllers/requesterController';
 
-let router = require('express').Router();
+const router = Router();
 
 
-router.post('/', requesterController.createRequester);
+router.route('/')
+.post(requesterController.createRequester)
+.get(requesterController.fetchrequesters);
 router.post('/blood-request', requesterController.postBloodRequest);
-router.get('/', requesterController.fetchrequesters);
 
-module.exports = router
+export default router;

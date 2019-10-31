@@ -1,13 +1,12 @@
+import {Router} from "express";
 
 import userValid from '../middleware/userValid';
 import donorCheck from '../middleware/donorCheck';
 import DonorController from '../controllers/donors';
-// let controllers = require('../controllers/donors');
 
-let router = require('express').Router();
-
+const router = Router();
 
 router.post('/respond', userValid, donorCheck, DonorController.respond);
 
-module.exports = router
+export default router;
 

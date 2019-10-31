@@ -1,6 +1,3 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import dotenv from "dotenv";
 import db from "../models";
 import {} from "../services/emails";
 

@@ -1,9 +1,10 @@
+import {Router} from "express";
 
-const router = require('express').Router();
+const router = Router();
 
 import hospitalController from '../controllers/hospitalConntroller';
 
 router.post('/populate', hospitalController.populate);
 router.get('/fetch', hospitalController.fetch);
 
-module.exports = router;
+export default router;
