@@ -1,4 +1,4 @@
-exports.generateOTP= (x) => {
+export const generateOTP= (x) => {
     // 463309364588305
     let text = '';
     const possible = '0123456789';
@@ -6,7 +6,7 @@ exports.generateOTP= (x) => {
     return ''.concat(text);
 };
 
-exports.validateParameters=(params, body, res) =>{
+export const validateParameters=(params, body, res) =>{
 
 
     let userData = body;
