@@ -1,6 +1,9 @@
 # BloodHub
+
+[![CircleCI](https://circleci.com/gh/ozimos/BloodHub.svg?style=shield)](https://circleci.com/gh/ozimos/BloodHub)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fd135cf884053fbc9245/maintainability)](https://codeclimate.com/github/ozimos/BloodHub/maintainability) 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fd135cf884053fbc9245/test_coverage)](https://codeclimate.com/github/ozimos/BloodHub/test_coverage)
+
 Connecting donors to people in need
 
 ## Technology
