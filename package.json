@@ -51,7 +51,8 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
-    ]
+    ],
+    "coverageDirectory": "./build/logs"
   },
   "author": "",
   "license": "ISC",
