@@ -35,7 +35,8 @@
   },
   "scripts": {
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --watch",
+    "test": "jest --testTimeout=10000 --ci",
+    "test:watch": "cross-env NODE_ENV=test jest --testTimeout=10000 --watch",
     "start:dev": "nodemon --exec babel-node src/server.js",
     "migrate": "npx sequelize db:migrate && npx sequelize db:seed:all",
     "migrate:reset": "npx sequelize db:migrate:undo:all && npm run migrate",
