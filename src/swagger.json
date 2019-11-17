@@ -1,0 +1,1329 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BloodHub API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/user": {
+      "get": {
+        "operationId": "userQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "where",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UserWhereUniqueInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/donors": {
+      "get": {
+        "operationId": "donorsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "first",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "last",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Donor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/hospitals": {
+      "get": {
+        "operationId": "hospitalsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "first",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "last",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Hospital"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/create-one-user": {
+      "post": {
+        "operationId": "createOneUserMutation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/UserCreateInput"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/create-one-donor": {
+      "post": {
+        "operationId": "createOneDonorMutation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/DonorCreateInput"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Donor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/update-one-user": {
+      "post": {
+        "operationId": "updateOneUserMutation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/UserUpdateInput"
+                  },
+                  "where": {
+                    "$ref": "#/components/schemas/UserWhereUniqueInput"
+                  }
+                },
+                "required": [
+                  "data",
+                  "where"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/update-one-donor": {
+      "post": {
+        "operationId": "updateOneDonorMutation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/DonorUpdateInput"
+                  },
+                  "where": {
+                    "$ref": "#/components/schemas/DonorWhereUniqueInput"
+                  }
+                },
+                "required": [
+                  "data",
+                  "where"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Donor"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Query": {
+        "type": "object",
+        "required": [
+          "donors",
+          "hospitals"
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "donors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Donor"
+            }
+          },
+          "hospitals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Hospital"
+            }
+          }
+        }
+      },
+      "UserWhereUniqueInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "id",
+          "firstName",
+          "phone",
+          "createdAt",
+          "updatedAt",
+          "password",
+          "email",
+          "isDonor"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "donor": {
+            "$ref": "#/components/schemas/Donor"
+          },
+          "isDonor": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Donor": {
+        "type": "object",
+        "required": [
+          "id",
+          "user",
+          "bloodGroup",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "bloodGroup": {
+            "type": "object"
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "Hospital": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "street",
+          "lg",
+          "state",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "Mutation": {
+        "type": "object",
+        "required": [
+          "createOneUser",
+          "createOneDonor"
+        ],
+        "properties": {
+          "createOneUser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "createOneDonor": {
+            "$ref": "#/components/schemas/Donor"
+          },
+          "updateOneUser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "updateOneDonor": {
+            "$ref": "#/components/schemas/Donor"
+          }
+        }
+      },
+      "UserCreateInput": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "email",
+          "phone",
+          "password"
+        ],
+        "properties": {
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "donor": {
+            "type": "object"
+          },
+          "bloodRequests": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorCreateOneWithoutDonorInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorCreateWithoutUserInput": {
+        "type": "object",
+        "required": [
+          "bloodGroup"
+        ],
+        "properties": {
+          "bloodGroup": {
+            "type": "object"
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorWhereUniqueInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "BloodRequestCreateManyWithoutBloodRequestsInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "connect": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "BloodRequestCreateWithoutRequesterInput": {
+        "type": "object",
+        "required": [
+          "bloodGroup",
+          "status",
+          "hospital"
+        ],
+        "properties": {
+          "bloodGroup": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "hospital": {
+            "type": "object"
+          }
+        }
+      },
+      "HospitalCreateOneWithoutHospitalInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          }
+        }
+      },
+      "HospitalCreateWithoutBloodRequestsInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "street",
+          "lg",
+          "state"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "HospitalWhereUniqueInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "BloodRequestWhereUniqueInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DonorCreateInput": {
+        "type": "object",
+        "required": [
+          "bloodGroup",
+          "user"
+        ],
+        "properties": {
+          "bloodGroup": {
+            "type": "object"
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "user": {
+            "type": "object"
+          }
+        }
+      },
+      "UserCreateOneWithoutUserInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          }
+        }
+      },
+      "UserCreateWithoutDonorInput": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "email",
+          "phone",
+          "password"
+        ],
+        "properties": {
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "bloodRequests": {
+            "type": "object"
+          }
+        }
+      },
+      "UserUpdateInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "donor": {
+            "type": "object"
+          },
+          "bloodRequests": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorUpdateOneWithoutUserInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          },
+          "disconnect": {
+            "type": "boolean"
+          },
+          "delete": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object"
+          },
+          "upsert": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorUpdateWithoutUserDataInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bloodGroup": {
+            "type": "object"
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorUpsertWithoutUserInput": {
+        "type": "object",
+        "required": [
+          "update",
+          "create"
+        ],
+        "properties": {
+          "update": {
+            "type": "object"
+          },
+          "create": {
+            "type": "object"
+          }
+        }
+      },
+      "BloodRequestUpdateManyWithoutRequesterInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "connect": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "set": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "disconnect": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "delete": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "update": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "updateMany": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "deleteMany": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "upsert": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "BloodRequestUpdateWithWhereUniqueWithoutRequesterInput": {
+        "type": "object",
+        "required": [
+          "where",
+          "data"
+        ],
+        "properties": {
+          "where": {
+            "type": "object"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "BloodRequestUpdateWithoutRequesterDataInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bloodGroup": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "hospital": {
+            "type": "object"
+          }
+        }
+      },
+      "HospitalUpdateOneRequiredWithoutBloodRequestsInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          },
+          "update": {
+            "type": "object"
+          },
+          "upsert": {
+            "type": "object"
+          }
+        }
+      },
+      "HospitalUpdateWithoutBloodRequestsDataInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "HospitalUpsertWithoutBloodRequestsInput": {
+        "type": "object",
+        "required": [
+          "update",
+          "create"
+        ],
+        "properties": {
+          "update": {
+            "type": "object"
+          },
+          "create": {
+            "type": "object"
+          }
+        }
+      },
+      "BloodRequestUpdateManyWithWhereNestedInput": {
+        "type": "object",
+        "required": [
+          "where",
+          "data"
+        ],
+        "properties": {
+          "where": {
+            "type": "object"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "BloodRequestScalarWhereInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "object"
+          },
+          "bloodGroup": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "AND": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "OR": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "NOT": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "IntFilter": {
+        "type": "object",
+        "properties": {
+          "equals": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "not": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "in": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "notIn": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "lt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lte": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gte": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DateTimeFilter": {
+        "type": "object",
+        "properties": {
+          "equals": {
+            "type": "object"
+          },
+          "not": {
+            "type": "object"
+          },
+          "in": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "notIn": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "lt": {
+            "type": "object"
+          },
+          "lte": {
+            "type": "object"
+          },
+          "gt": {
+            "type": "object"
+          },
+          "gte": {
+            "type": "object"
+          }
+        }
+      },
+      "BloodRequestUpdateManyDataInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bloodGroup": {
+            "type": "object"
+          },
+          "status": {
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "BloodRequestUpsertWithWhereUniqueWithoutRequesterInput": {
+        "type": "object",
+        "required": [
+          "where",
+          "update",
+          "create"
+        ],
+        "properties": {
+          "where": {
+            "type": "object"
+          },
+          "update": {
+            "type": "object"
+          },
+          "create": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorUpdateInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bloodGroup": {
+            "type": "object"
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "user": {
+            "type": "object"
+          }
+        }
+      },
+      "UserUpdateOneRequiredWithoutDonorInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          },
+          "update": {
+            "type": "object"
+          },
+          "upsert": {
+            "type": "object"
+          }
+        }
+      },
+      "UserUpdateWithoutDonorDataInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "bloodRequests": {
+            "type": "object"
+          }
+        }
+      },
+      "UserUpsertWithoutDonorInput": {
+        "type": "object",
+        "required": [
+          "update",
+          "create"
+        ],
+        "properties": {
+          "update": {
+            "type": "object"
+          },
+          "create": {
+            "type": "object"
+          }
+        }
+      },
+      "BloodRequest": {
+        "type": "object",
+        "required": [
+          "id",
+          "requester",
+          "bloodGroup",
+          "hospital",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requester": {
+            "$ref": "#/components/schemas/User"
+          },
+          "bloodGroup": {
+            "type": "object"
+          },
+          "hospital": {
+            "$ref": "#/components/schemas/Hospital"
+          },
+          "status": {
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "ID": {
+        "type": "string"
+      }
+    }
+  }
+}
