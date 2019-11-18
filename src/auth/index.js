@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const signIn = async (email, password, prisma) => {
+export const signIn = async (email, password, photon) => {
   try {
-    const { password: storedPassword, ...user } = await prisma.user({
+    const { password: storedPassword, ...user } = await photon.users.findOne({
       where: {
         email
       }
@@ -22,21 +22,23 @@ export const signIn = async (email, password, prisma) => {
   }
 };
 
-export const register = async ({password, ...data}, prisma) => {
+export const register = async ({ password, ...data }, photon) => {
+  console.log(data);
   try {
-    const existingUser = await prisma.user({
+    const existingUser = await photon.users.findOne({
       where: {
         email: data.email
-      }
+      },
+      select: { id: true }
     });
     if (existingUser) {
       throw new Error("ERROR: email already used.");
     }
     const hash = bcrypt.hashSync(password, 10);
 
-    const { password, ...register } = await prisma.createUser({
-      ...data,
-      password: hash
+    const { password: savedPassword, ...register } = await photon.users.create({
+      data: { ...data, password: hash },
+      include: { donor: true }
     });
     const token = jwt.sign(register, process.env.JWT_SECRET);
     return {

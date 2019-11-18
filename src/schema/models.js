@@ -1,27 +1,64 @@
-import { objectType, interfaceType } from "nexus";
+import { objectType, interfaceType, inputObjectType } from "nexus";
+
+const userBasic = [
+  {name: "firstName", value: { description: "First Name" }},
+  {name: "lastName", value: { description: "Last Name" }}
+];
+
+const userExtra = [
+  {name: "phone", value: { description: "First Name", required: false, }},
+  {name: "street", value: { description: "Last Name" }},
+  {name: "lg", value: { description: "Local Government" }},
+  {name: "state", value: { description: "State" }},
+]
+
+const userLogin = [
+  {name: "password", value: { description: "Password" }},
+  {name: "email", value: { description: "Email" }}
+];
+
+const UserRegisterInput = inputObjectType({
+  name: "UserRegisterInput",
+  definition(t) {
+    userBasic.forEach(field => t.string(field.name, field.value))
+    userLogin.forEach(field => t.string(field.name, {required: true, ...field.value}))
+    userExtra.forEach(field => t.string(field.name, field.value))
+  }
+});
+
+const UserBasic = interfaceType({
+  name: "UserBasic",
+  definition(t) {
+    t.int("id", { description: "ID" });
+    userBasic.forEach(field => t.string(field.name, field.value))
+    t.resolveType(field => t.model("User")[field]());
+  }
+});
+
+const UserLoginInput = inputObjectType({
+  name: "UserLoginInput",
+  definition(t) {
+    userLogin.forEach(field => t.string(field.name, {required: true, ...field.value}))
+  }
+});
+
+const UserExtra = interfaceType({
+  name: "UserExtra",
+  definition(t) {
+    userLogin.forEach(field => t.string(field.name, {required: true, ...field.value}))
+    userExtra.forEach(field => t.string(field.name, field.value))
+    t.resolveType(field => t.model("User")[field]());
+  }
+});
 
 const User = objectType({
   name: "User",
   definition(t) {
-    t.implements("UserTokenPayload")
-    t.model.phone();
-    t.model.street();
-    t.model.lg();
-    t.model.state();
+    t.implements("UserBasic");
+    t.implements("UserExtra");
+    t.model.donor();
     t.model.createdAt();
     t.model.updatedAt();
-    t.model.password();
-    t.model.email();
-  }
-});
-
-const UserTokenPayload = interfaceType({
-  name: "UserTokenPayload",
-  definition(t) {
-    t.model("User").id();
-    t.model("User").firstName();
-    t.model("User").lastName();
-    t.model("User").donor();
     t.boolean("isDonor", {
       resolve({ donor }) {
         return Boolean(donor);
@@ -29,6 +66,17 @@ const UserTokenPayload = interfaceType({
     });
   }
 });
+
+const UserLoginPayload = objectType({
+  name: "UserLoginPayload",
+  definition(t) {
+    t.field("user", {
+      type: "User"
+    });
+    t.string("token");
+  }
+});
+
 
 const Donor = objectType({
   name: "Donor",
@@ -68,21 +116,15 @@ const BloodRequest = objectType({
   }
 });
 
-const UserLoginPayload = objectType({
-  name: "UserLoginPayload",
-  definition(t) {
-    t.field("user", {
-      type: "UserTokenPayload"
-    });
-    t.string("token");
-  }
-});
 
 export default [
+  UserBasic,
+  UserExtra,
   User,
+  UserRegisterInput,
   Donor,
   Hospital,
   BloodRequest,
   UserLoginPayload,
-  UserTokenPayload
+  UserLoginInput,
 ];

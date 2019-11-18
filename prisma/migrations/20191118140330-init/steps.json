@@ -385,6 +385,12 @@
       "arity": "required"
     },
     {
+      "stepType": "CreateDirective",
+      "model": "User",
+      "field": "email",
+      "directive": "unique"
+    },
+    {
       "stepType": "CreateField",
       "model": "User",
       "field": "phone",
