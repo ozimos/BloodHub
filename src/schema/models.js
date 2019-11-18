@@ -1,11 +1,8 @@
 import { objectType, interfaceType, inputObjectType } from "nexus";
 
-const userBasic = [
-  {name: "firstName", value: { description: "First Name" }},
-  {name: "lastName", value: { description: "Last Name" }}
-];
-
 const userExtra = [
+  {name: "firstName", value: { description: "First Name" }},
+  {name: "lastName", value: { description: "Last Name" }},
   {name: "phone", value: { description: "First Name", required: false, }},
   {name: "street", value: { description: "Last Name" }},
   {name: "lg", value: { description: "Local Government" }},
@@ -20,18 +17,8 @@ const userLogin = [
 const UserRegisterInput = inputObjectType({
   name: "UserRegisterInput",
   definition(t) {
-    userBasic.forEach(field => t.string(field.name, field.value))
     userLogin.forEach(field => t.string(field.name, {required: true, ...field.value}))
     userExtra.forEach(field => t.string(field.name, field.value))
-  }
-});
-
-const UserBasic = interfaceType({
-  name: "UserBasic",
-  definition(t) {
-    t.int("id", { description: "ID" });
-    userBasic.forEach(field => t.string(field.name, field.value))
-    t.resolveType(field => t.model("User")[field]());
   }
 });
 
@@ -42,20 +29,12 @@ const UserLoginInput = inputObjectType({
   }
 });
 
-const UserExtra = interfaceType({
-  name: "UserExtra",
-  definition(t) {
-    userLogin.forEach(field => t.string(field.name, {required: true, ...field.value}))
-    userExtra.forEach(field => t.string(field.name, field.value))
-    t.resolveType(field => t.model("User")[field]());
-  }
-});
-
 const User = objectType({
   name: "User",
   definition(t) {
-    t.implements("UserBasic");
-    t.implements("UserExtra");
+    userLogin.forEach(field => t.model[field.name]())
+    userExtra.forEach(field => t.model[field.name]())
+    t.model.id();
     t.model.donor();
     t.model.createdAt();
     t.model.updatedAt();
@@ -76,7 +55,6 @@ const UserLoginPayload = objectType({
     t.string("token");
   }
 });
-
 
 const Donor = objectType({
   name: "Donor",
@@ -116,10 +94,7 @@ const BloodRequest = objectType({
   }
 });
 
-
 export default [
-  UserBasic,
-  UserExtra,
   User,
   UserRegisterInput,
   Donor,

@@ -380,56 +380,43 @@
       "User": {
         "type": "object",
         "required": [
-          "id",
-          "firstName",
-          "lastName",
           "password",
           "email",
+          "firstName",
           "phone",
-          "street",
-          "lg",
-          "state",
+          "id",
           "createdAt",
           "updatedAt",
           "isDonor"
         ],
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "ID"
-          },
-          "firstName": {
-            "type": "string",
-            "description": "First Name"
-          },
-          "lastName": {
-            "type": "string",
-            "description": "Last Name"
-          },
           "password": {
-            "type": "string",
-            "description": "Password"
+            "type": "string"
           },
           "email": {
-            "type": "string",
-            "description": "Email"
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
           },
           "phone": {
-            "type": "string",
-            "description": "First Name"
+            "type": "string"
           },
           "street": {
-            "type": "string",
-            "description": "Last Name"
+            "type": "string"
           },
           "lg": {
-            "type": "string",
-            "description": "Local Government"
+            "type": "string"
           },
           "state": {
-            "type": "string",
-            "description": "State"
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
           },
           "donor": {
             "$ref": "#/components/schemas/Donor"
@@ -1314,14 +1301,6 @@
           "email"
         ],
         "properties": {
-          "firstName": {
-            "type": "string",
-            "description": "First Name"
-          },
-          "lastName": {
-            "type": "string",
-            "description": "Last Name"
-          },
           "password": {
             "type": "string",
             "description": "Password"
@@ -1329,6 +1308,14 @@
           "email": {
             "type": "string",
             "description": "Email"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First Name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last Name"
           },
           "phone": {
             "type": "string",

@@ -23,7 +23,6 @@ export const signIn = async (email, password, photon) => {
 };
 
 export const register = async ({ password, ...data }, photon) => {
-  console.log(data);
   try {
     const existingUser = await photon.users.findOne({
       where: {
