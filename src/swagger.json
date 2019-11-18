@@ -24,7 +24,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "type": "object"
                 }
               }
             }
@@ -192,7 +192,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "type": "object"
                 }
               }
             }
@@ -264,7 +264,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "type": "object"
                 }
               }
             }
@@ -309,6 +309,82 @@
           }
         }
       }
+    },
+    "/api/user-login": {
+      "post": {
+        "operationId": "userLoginMutation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLoginPayload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user-register": {
+      "post": {
+        "operationId": "userRegisterMutation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "data",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLoginPayload"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -321,7 +397,7 @@
         ],
         "properties": {
           "user": {
-            "$ref": "#/components/schemas/User"
+            "type": "object"
           },
           "donors": {
             "type": "array",
@@ -346,16 +422,11 @@
           }
         }
       },
-      "User": {
+      "UserTokenPayload": {
         "type": "object",
         "required": [
           "id",
           "firstName",
-          "phone",
-          "createdAt",
-          "updatedAt",
-          "password",
-          "email",
           "isDonor"
         ],
         "properties": {
@@ -367,30 +438,6 @@
             "type": "string"
           },
           "lastName": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "street": {
-            "type": "string"
-          },
-          "lg": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "object"
-          },
-          "updatedAt": {
-            "type": "object"
-          },
-          "password": {
-            "type": "string"
-          },
-          "email": {
             "type": "string"
           },
           "donor": {
@@ -416,7 +463,7 @@
             "format": "int32"
           },
           "user": {
-            "$ref": "#/components/schemas/User"
+            "type": "object"
           },
           "bloodGroup": {
             "type": "object"
@@ -429,6 +476,42 @@
           },
           "updatedAt": {
             "type": "object"
+          }
+        }
+      },
+      "UserExtra": {
+        "type": "object",
+        "required": [
+          "phone",
+          "createdAt",
+          "updatedAt",
+          "password",
+          "email"
+        ],
+        "properties": {
+          "phone": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
           }
         }
       },
@@ -472,20 +555,28 @@
         "type": "object",
         "required": [
           "createOneUser",
-          "createOneDonor"
+          "createOneDonor",
+          "userLogin",
+          "userRegister"
         ],
         "properties": {
           "createOneUser": {
-            "$ref": "#/components/schemas/User"
+            "type": "object"
           },
           "createOneDonor": {
             "$ref": "#/components/schemas/Donor"
           },
           "updateOneUser": {
-            "$ref": "#/components/schemas/User"
+            "type": "object"
           },
           "updateOneDonor": {
             "$ref": "#/components/schemas/Donor"
+          },
+          "userLogin": {
+            "$ref": "#/components/schemas/UserLoginPayload"
+          },
+          "userRegister": {
+            "$ref": "#/components/schemas/UserLoginPayload"
           }
         }
       },
@@ -1285,6 +1376,21 @@
           }
         }
       },
+      "UserLoginPayload": {
+        "type": "object",
+        "required": [
+          "user",
+          "token"
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserTokenPayload"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
       "BloodRequest": {
         "type": "object",
         "required": [
@@ -1302,7 +1408,7 @@
             "format": "int32"
           },
           "requester": {
-            "$ref": "#/components/schemas/User"
+            "type": "object"
           },
           "bloodGroup": {
             "type": "object"
