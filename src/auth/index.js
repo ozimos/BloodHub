@@ -6,7 +6,8 @@ export const signIn = async (email, password, photon) => {
     const { password: storedPassword, ...user } = await photon.users.findOne({
       where: {
         email
-      }
+      },
+      include: { donor: true }
     });
     const validpass = await bcrypt.compareSync(password, storedPassword);
     if (validpass) {

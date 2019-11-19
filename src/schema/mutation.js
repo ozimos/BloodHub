@@ -1,14 +1,14 @@
-import { mutationType, stringArg, arg } from "nexus";
+import { mutationType, arg } from "nexus";
 import { signIn, register } from "../auth";
 
 export default mutationType({
   definition(t) {
-    // t.crud.createOneUser();
+    t.crud.createOneUser();
     t.crud.createOneDonor();
     t.crud.updateOneUser();
     t.crud.updateOneDonor();
     t.field("userLogin", {
-      type: "UserLoginPayload",
+      type: "UserAuthPayload",
       args: {
         data: arg({ type: "UserLoginInput"})
       },
@@ -18,9 +18,9 @@ export default mutationType({
       }
     });
     t.field("userRegister", {
-      type: "UserLoginPayload",
+      type: "UserAuthPayload",
       args: {
-        data: arg({ type: "UserRegisterInput"}),
+        data: arg({ type: "UserCreateInput"}),
       },
       async resolve(root, {data}, { photon }) {
         const response = await register(data, photon);

@@ -32,17 +32,24 @@
     "@babel/node": "^7.6.3",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
+    "apollo-server": "^2.9.9",
+    "apollo-server-testing": "^2.9.9",
     "cross-env": "^6.0.3",
+    "esm": "^3.2.25",
     "faker": "^4.1.0",
     "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
     "nodemon": "^1.19.4",
     "prisma2": "2.0.0-preview016.2",
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
-    "test": "cross-env PRISMA_TEST_PROVIDER=true jest --testTimeout=10000 --ci --coverage",
-    "test:watch": "cross-env PRISMA_TEST_PROVIDER=true jest --testTimeout=10000 --watch",
+    "pretest": "cross-env PRISMA_PROVIDER=false PRISMA_TEST_PROVIDER=true yarn migrate",
+    "migrate": "prisma2 lift up && yarn seed",
+    "seed": "node -r dotenv/config -r esm src/seeds/seeder",
+    "test:base": "cross-env PRISMA_PROVIDER=false PRISMA_TEST_PROVIDER=true jest --testTimeout=10000",
+    "test": "yarn test:base --ci --coverage",
+    "test:watch": "yarn pretest && yarn test:base --watch",
     "start:dev": "nodemon --exec babel-node src/app.js  --ignore swagger.json",
     "postinstall": "prisma2 generate",
     "build": "babel src --out-dir dist",
@@ -57,7 +64,13 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ],
-    "coverageDirectory": "./build/logs"
+    "coverageDirectory": "./build/logs",
+    "setupFiles": [
+      "./setupTests.js"
+    ],
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ]
   },
   "author": "",
   "license": "ISC",

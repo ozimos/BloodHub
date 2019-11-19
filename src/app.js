@@ -20,7 +20,7 @@ const openApi = OpenAPI({
 
 const photon = new Photon();
 
-const server = new GraphQLServer({
+export const server = new GraphQLServer({
   schema,
   context: { photon }
 });

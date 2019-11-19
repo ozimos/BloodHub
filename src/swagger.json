@@ -166,6 +166,40 @@
         }
       }
     },
+    "/api/create-one-user": {
+      "post": {
+        "operationId": "createOneUserMutation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/UserCreateInput"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/create-one-donor": {
       "post": {
         "operationId": "createOneDonorMutation",
@@ -299,7 +333,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLoginPayload"
+                  "$ref": "#/components/schemas/UserAuthPayload"
                 }
               }
             }
@@ -317,7 +351,7 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/UserRegisterInput"
+                    "$ref": "#/components/schemas/UserCreateInput"
                   }
                 }
               }
@@ -330,7 +364,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserLoginPayload"
+                  "$ref": "#/components/schemas/UserAuthPayload"
                 }
               }
             }
@@ -382,9 +416,9 @@
         "required": [
           "password",
           "email",
+          "id",
           "firstName",
           "phone",
-          "id",
           "createdAt",
           "updatedAt",
           "isDonor"
@@ -395,6 +429,10 @@
           },
           "email": {
             "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
           },
           "firstName": {
             "type": "string"
@@ -413,10 +451,6 @@
           },
           "state": {
             "type": "string"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
           },
           "donor": {
             "$ref": "#/components/schemas/Donor"
@@ -502,11 +536,15 @@
       "Mutation": {
         "type": "object",
         "required": [
+          "createOneUser",
           "createOneDonor",
           "userLogin",
           "userRegister"
         ],
         "properties": {
+          "createOneUser": {
+            "$ref": "#/components/schemas/User"
+          },
           "createOneDonor": {
             "$ref": "#/components/schemas/Donor"
           },
@@ -517,49 +555,14 @@
             "$ref": "#/components/schemas/Donor"
           },
           "userLogin": {
-            "$ref": "#/components/schemas/UserLoginPayload"
+            "$ref": "#/components/schemas/UserAuthPayload"
           },
           "userRegister": {
-            "$ref": "#/components/schemas/UserLoginPayload"
+            "$ref": "#/components/schemas/UserAuthPayload"
           }
         }
       },
-      "DonorCreateInput": {
-        "type": "object",
-        "required": [
-          "bloodGroup",
-          "user"
-        ],
-        "properties": {
-          "bloodGroup": {
-            "type": "object"
-          },
-          "document": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "object"
-          },
-          "updatedAt": {
-            "type": "object"
-          },
-          "user": {
-            "type": "object"
-          }
-        }
-      },
-      "UserCreateOneWithoutUserInput": {
-        "type": "object",
-        "properties": {
-          "create": {
-            "type": "object"
-          },
-          "connect": {
-            "type": "object"
-          }
-        }
-      },
-      "UserCreateWithoutDonorInput": {
+      "UserCreateInput": {
         "type": "object",
         "required": [
           "firstName",
@@ -598,8 +601,51 @@
           "password": {
             "type": "string"
           },
+          "donor": {
+            "type": "object"
+          },
           "bloodRequests": {
             "type": "object"
+          }
+        }
+      },
+      "DonorCreateOneWithoutDonorInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorCreateWithoutUserInput": {
+        "type": "object",
+        "required": [
+          "bloodGroup"
+        ],
+        "properties": {
+          "bloodGroup": {
+            "type": "object"
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          }
+        }
+      },
+      "DonorWhereUniqueInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -703,6 +749,85 @@
           }
         }
       },
+      "DonorCreateInput": {
+        "type": "object",
+        "required": [
+          "bloodGroup",
+          "user"
+        ],
+        "properties": {
+          "bloodGroup": {
+            "type": "object"
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "user": {
+            "type": "object"
+          }
+        }
+      },
+      "UserCreateOneWithoutUserInput": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "object"
+          },
+          "connect": {
+            "type": "object"
+          }
+        }
+      },
+      "UserCreateWithoutDonorInput": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "email",
+          "phone",
+          "password"
+        ],
+        "properties": {
+          "createdAt": {
+            "type": "object"
+          },
+          "updatedAt": {
+            "type": "object"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "lg": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "bloodRequests": {
+            "type": "object"
+          }
+        }
+      },
       "UserUpdateInput": {
         "type": "object",
         "properties": {
@@ -768,35 +893,6 @@
           },
           "upsert": {
             "type": "object"
-          }
-        }
-      },
-      "DonorCreateWithoutUserInput": {
-        "type": "object",
-        "required": [
-          "bloodGroup"
-        ],
-        "properties": {
-          "bloodGroup": {
-            "type": "object"
-          },
-          "document": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "object"
-          },
-          "updatedAt": {
-            "type": "object"
-          }
-        }
-      },
-      "DonorWhereUniqueInput": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -1279,7 +1375,7 @@
           }
         }
       },
-      "UserLoginPayload": {
+      "UserAuthPayload": {
         "type": "object",
         "required": [
           "user",
@@ -1291,47 +1387,6 @@
           },
           "token": {
             "type": "string"
-          }
-        }
-      },
-      "UserRegisterInput": {
-        "type": "object",
-        "required": [
-          "password",
-          "email"
-        ],
-        "properties": {
-          "password": {
-            "type": "string",
-            "description": "Password"
-          },
-          "email": {
-            "type": "string",
-            "description": "Email"
-          },
-          "firstName": {
-            "type": "string",
-            "description": "First Name"
-          },
-          "lastName": {
-            "type": "string",
-            "description": "Last Name"
-          },
-          "phone": {
-            "type": "string",
-            "description": "First Name"
-          },
-          "street": {
-            "type": "string",
-            "description": "Last Name"
-          },
-          "lg": {
-            "type": "string",
-            "description": "Local Government"
-          },
-          "state": {
-            "type": "string",
-            "description": "State"
           }
         }
       },

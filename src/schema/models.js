@@ -1,40 +1,30 @@
-import { objectType, interfaceType, inputObjectType } from "nexus";
-
-const userExtra = [
-  {name: "firstName", value: { description: "First Name" }},
-  {name: "lastName", value: { description: "Last Name" }},
-  {name: "phone", value: { description: "First Name", required: false, }},
-  {name: "street", value: { description: "Last Name" }},
-  {name: "lg", value: { description: "Local Government" }},
-  {name: "state", value: { description: "State" }},
-]
+import { objectType, inputObjectType } from "nexus";
 
 const userLogin = [
-  {name: "password", value: { description: "Password" }},
-  {name: "email", value: { description: "Email" }}
+  { name: "password", value: { description: "Password" } },
+  { name: "email", value: { description: "Email" } }
 ];
-
-const UserRegisterInput = inputObjectType({
-  name: "UserRegisterInput",
-  definition(t) {
-    userLogin.forEach(field => t.string(field.name, {required: true, ...field.value}))
-    userExtra.forEach(field => t.string(field.name, field.value))
-  }
-});
 
 const UserLoginInput = inputObjectType({
   name: "UserLoginInput",
   definition(t) {
-    userLogin.forEach(field => t.string(field.name, {required: true, ...field.value}))
+    userLogin.forEach(field =>
+      t.string(field.name, { required: true, ...field.value })
+    );
   }
 });
 
 const User = objectType({
   name: "User",
   definition(t) {
-    userLogin.forEach(field => t.model[field.name]())
-    userExtra.forEach(field => t.model[field.name]())
+    userLogin.forEach(field => t.model[field.name]());
     t.model.id();
+    t.model.firstName();
+    t.model.lastName();
+    t.model.phone();
+    t.model.street();
+    t.model.lg();
+    t.model.state();
     t.model.donor();
     t.model.createdAt();
     t.model.updatedAt();
@@ -46,8 +36,8 @@ const User = objectType({
   }
 });
 
-const UserLoginPayload = objectType({
-  name: "UserLoginPayload",
+const UserAuthPayload = objectType({
+  name: "UserAuthPayload",
   definition(t) {
     t.field("user", {
       type: "User"
@@ -96,10 +86,9 @@ const BloodRequest = objectType({
 
 export default [
   User,
-  UserRegisterInput,
   Donor,
   Hospital,
   BloodRequest,
-  UserLoginPayload,
-  UserLoginInput,
+  UserAuthPayload,
+  UserLoginInput
 ];
