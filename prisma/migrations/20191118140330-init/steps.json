@@ -1,0 +1,436 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "stepType": "CreateEnum",
+      "enum": "BloodGroup",
+      "values": [
+        "A_positive",
+        "A_negative",
+        "B_positive",
+        "B_negative",
+        "AB_positive",
+        "AB_negative",
+        "O_positive",
+        "O_negative"
+      ]
+    },
+    {
+      "stepType": "CreateEnum",
+      "enum": "Status",
+      "values": [
+        "pending",
+        "matched",
+        "reprocessing",
+        "failed",
+        "success"
+      ]
+    },
+    {
+      "stepType": "CreateModel",
+      "model": "BloodRequest"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "BloodRequest",
+      "field": "id",
+      "type": "Int",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "BloodRequest",
+      "field": "id",
+      "directive": "id"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "BloodRequest",
+      "field": "requester",
+      "type": "User",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "BloodRequest",
+      "field": "requester",
+      "directive": "map"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "BloodRequest",
+      "field": "requester",
+      "directive": "map",
+      "argument": "",
+      "value": "\"requesterId\""
+    },
+    {
+      "stepType": "CreateField",
+      "model": "BloodRequest",
+      "field": "bloodGroup",
+      "type": "BloodGroup",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "BloodRequest",
+      "field": "hospital",
+      "type": "Hospital",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "BloodRequest",
+      "field": "hospital",
+      "directive": "map"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "BloodRequest",
+      "field": "hospital",
+      "directive": "map",
+      "argument": "",
+      "value": "\"hospitalId\""
+    },
+    {
+      "stepType": "CreateField",
+      "model": "BloodRequest",
+      "field": "status",
+      "type": "Status",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "BloodRequest",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "BloodRequest",
+      "field": "createdAt",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "BloodRequest",
+      "field": "createdAt",
+      "directive": "default",
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "BloodRequest",
+      "field": "updatedAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "BloodRequest",
+      "field": "updatedAt",
+      "directive": "updatedAt"
+    },
+    {
+      "stepType": "CreateModel",
+      "model": "Donor"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Donor",
+      "field": "id",
+      "type": "Int",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Donor",
+      "field": "id",
+      "directive": "id"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Donor",
+      "field": "user",
+      "type": "User",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Donor",
+      "field": "user",
+      "directive": "map"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "Donor",
+      "field": "user",
+      "directive": "map",
+      "argument": "",
+      "value": "\"userId\""
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Donor",
+      "field": "user",
+      "directive": "relation"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "Donor",
+      "field": "user",
+      "directive": "relation",
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Donor",
+      "field": "bloodGroup",
+      "type": "BloodGroup",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Donor",
+      "field": "document",
+      "type": "String",
+      "arity": "optional"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Donor",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Donor",
+      "field": "createdAt",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "Donor",
+      "field": "createdAt",
+      "directive": "default",
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Donor",
+      "field": "updatedAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Donor",
+      "field": "updatedAt",
+      "directive": "updatedAt"
+    },
+    {
+      "stepType": "CreateModel",
+      "model": "Hospital"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hospital",
+      "field": "id",
+      "type": "Int",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Hospital",
+      "field": "id",
+      "directive": "id"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hospital",
+      "field": "name",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hospital",
+      "field": "street",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hospital",
+      "field": "lg",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hospital",
+      "field": "state",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hospital",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Hospital",
+      "field": "createdAt",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "Hospital",
+      "field": "createdAt",
+      "directive": "default",
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hospital",
+      "field": "updatedAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Hospital",
+      "field": "updatedAt",
+      "directive": "updatedAt"
+    },
+    {
+      "stepType": "CreateModel",
+      "model": "User"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "id",
+      "type": "Int",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "User",
+      "field": "id",
+      "directive": "id"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "User",
+      "field": "createdAt",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "User",
+      "field": "createdAt",
+      "directive": "default",
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "updatedAt",
+      "type": "DateTime",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "User",
+      "field": "updatedAt",
+      "directive": "updatedAt"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "firstName",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "lastName",
+      "type": "String",
+      "arity": "optional"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "email",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "User",
+      "field": "email",
+      "directive": "unique"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "phone",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "street",
+      "type": "String",
+      "arity": "optional"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "lg",
+      "type": "String",
+      "arity": "optional"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "state",
+      "type": "String",
+      "arity": "optional"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "password",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "field": "donor",
+      "type": "Donor",
+      "arity": "optional"
+    }
+  ]
+}

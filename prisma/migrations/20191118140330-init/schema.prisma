@@ -1,0 +1,76 @@
+datasource db {
+  provider = "postgresql"
+  url = "***"
+  enabled = env("PRISMA_PROVIDER")
+}
+
+datasource test_db {
+  provider = "postgresql"
+  url = "***"
+  enabled = env("PRISMA_TEST_PROVIDER")
+}
+
+generator photon {
+  provider = "photonjs"
+}
+
+enum BloodGroup {
+     A_positive
+        A_negative
+        B_positive
+        B_negative
+        AB_positive
+        AB_negative
+        O_positive
+        O_negative
+}
+
+enum Status {
+  pending
+  matched
+  reprocessing
+  failed
+  success
+}
+
+model BloodRequest {
+  id Int @id
+  requester User  @map("requesterId")
+  bloodGroup BloodGroup
+  hospital Hospital @map("hospitalId")
+  status Status
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Donor {
+  id Int @id
+  user User @map("userId") @relation(references: [id])
+  bloodGroup BloodGroup
+  document String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Hospital {
+  id Int @id
+  name String
+  street String
+  lg String
+  state String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id        Int    @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstName     String
+  lastName   String?
+  email     String @unique
+  phone     String
+  street     String?
+  lg     String?
+  state     String?
+  password     String
+  donor Donor?
+}
