@@ -166,6 +166,24 @@
         }
       }
     },
+    "/api/get-current-user": {
+      "get": {
+        "operationId": "getCurrentUserQuery",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/create-one-user": {
       "post": {
         "operationId": "createOneUserMutation",
@@ -396,6 +414,9 @@
             "items": {
               "$ref": "#/components/schemas/Hospital"
             }
+          },
+          "getCurrentUser": {
+            "$ref": "#/components/schemas/User"
           }
         }
       },

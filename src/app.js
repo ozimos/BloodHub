@@ -1,6 +1,7 @@
 import { useSofa, OpenAPI } from "sofa-api";
 import { GraphQLServer } from "graphql-yoga";
 import { config } from "dotenv";
+import jwt from "jsonwebtoken";
 import swaggerUi from "swagger-ui-express";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Photon } from "@generated/photon";
@@ -20,9 +21,52 @@ const openApi = OpenAPI({
 
 const photon = new Photon();
 
+async function getUser(authorization) {
+  const bearerLength = "Bearer ".length;
+  if (authorization && authorization.length > bearerLength) {
+    const token = authorization.slice(bearerLength);
+    const {
+      ok,
+      result
+    } = await new Promise(resolve =>
+      jwt.verify(token, process.env.JWT_SECRET, (err, result) => {
+        if (err) {
+          resolve({
+            ok: false,
+            result: err
+          });
+        } else {
+          resolve({
+            ok: true,
+            result
+          });
+        }
+      })
+    );
+    if (ok) {
+      const user = await photon.users.findOne({
+        where: { email: result.email },
+        include: { donor: true }
+      });
+      return user;
+    } else {
+      console.error(result);
+      return null;
+    }
+  }
+  return null;
+}
+
+async function context({ request }) {
+  const currentUser = await getUser(request.get("Authorization"));
+  return {
+    photon,
+    currentUser
+  };
+}
 export const server = new GraphQLServer({
   schema,
-  context: { photon }
+  context
 });
 
 server.express.use(
