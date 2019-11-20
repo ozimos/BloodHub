@@ -7,13 +7,12 @@ import Query from './query';
 import models from './models';
 
 export default makeSchema({
-  types: [
-    Query,
-    Mutation,
-    ...models
-  ],
+  types: [Query, Mutation, ...models],
   plugins: [nexusPrismaPlugin()],
   outputs: {
-    typegen: path.join(__dirname, '../node_modules/@types/nexus-typegen/index.d.ts'),
+    typegen: path.join(
+      __dirname,
+      '../node_modules/@types/nexus-typegen/index.d.ts',
+    ),
   },
 });
