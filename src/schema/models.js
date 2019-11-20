@@ -1,21 +1,21 @@
-import { objectType, inputObjectType } from "nexus";
+import { objectType, inputObjectType } from 'nexus';
 
 const userLogin = [
-  { name: "password", value: { description: "Password" } },
-  { name: "email", value: { description: "Email" } }
+  { name: 'password', value: { description: 'Password' } },
+  { name: 'email', value: { description: 'Email' } },
 ];
 
 const UserLoginInput = inputObjectType({
-  name: "UserLoginInput",
+  name: 'UserLoginInput',
   definition(t) {
     userLogin.forEach(field =>
-      t.string(field.name, { required: true, ...field.value })
+      t.string(field.name, { required: true, ...field.value }),
     );
-  }
+  },
 });
 
 const User = objectType({
-  name: "User",
+  name: 'User',
   definition(t) {
     userLogin.forEach(field => t.model[field.name]());
     t.model.id();
@@ -28,26 +28,26 @@ const User = objectType({
     t.model.donor();
     t.model.createdAt();
     t.model.updatedAt();
-    t.boolean("isDonor", {
+    t.boolean('isDonor', {
       resolve({ donor }) {
         return Boolean(donor);
-      }
+      },
     });
-  }
+  },
 });
 
 const UserAuthPayload = objectType({
-  name: "UserAuthPayload",
+  name: 'UserAuthPayload',
   definition(t) {
-    t.field("user", {
-      type: "User"
+    t.field('user', {
+      type: 'User',
     });
-    t.string("token");
-  }
+    t.string('token');
+  },
 });
 
 const Donor = objectType({
-  name: "Donor",
+  name: 'Donor',
   definition(t) {
     t.model.id();
     t.model.user();
@@ -55,11 +55,11 @@ const Donor = objectType({
     t.model.document();
     t.model.createdAt();
     t.model.updatedAt();
-  }
+  },
 });
 
 const Hospital = objectType({
-  name: "Hospital",
+  name: 'Hospital',
   definition(t) {
     t.model.id();
     t.model.name();
@@ -68,11 +68,11 @@ const Hospital = objectType({
     t.model.state();
     t.model.createdAt();
     t.model.updatedAt();
-  }
+  },
 });
 
 const BloodRequest = objectType({
-  name: "BloodRequest",
+  name: 'BloodRequest',
   definition(t) {
     t.model.id();
     t.model.requester();
@@ -81,7 +81,7 @@ const BloodRequest = objectType({
     t.model.status();
     t.model.createdAt();
     t.model.updatedAt();
-  }
+  },
 });
 
 export default [
@@ -90,5 +90,5 @@ export default [
   Hospital,
   BloodRequest,
   UserAuthPayload,
-  UserLoginInput
+  UserLoginInput,
 ];

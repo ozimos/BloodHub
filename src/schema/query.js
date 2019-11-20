@@ -6,12 +6,12 @@ export default objectType({
     t.crud.user();
     t.crud.donors();
     t.crud.hospitals();
-    t.field('getCurrentUser', {  
-      type: 'User',  
-      nullable: true, 
-      async resolve(root, args, context, info) {  
-        return context.currentUser  
-      },  
-    })
+    t.field('getCurrentUser', {
+      type: 'User',
+      nullable: true,
+      async resolve(root, args, context) {
+        return context.currentUser;
+      },
+    });
   },
 });
