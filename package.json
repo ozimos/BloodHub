@@ -53,8 +53,8 @@
     "test:watch": "yarn pretest && yarn test:base --watch",
     "start:dev": "nodemon --exec babel-node src/app.js  --ignore swagger.json",
     "postinstall": "prisma2 generate",
-    "heroku-postbuild": "prisma2 generate && babel src --out-dir dist && yarn migrate",
-    "build": "babel src --out-dir dist",
+    "heroku-postbuild": "babel src --out-dir dist && yarn migrate",
+    "build": "babel src --out-dir dist --copy-files",
     "start": "node dist/app.js",
     "lint": "eslint src/**/*.js --max-warnings 5"
   },
