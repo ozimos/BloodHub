@@ -1,7 +1,6 @@
 import { useSofa, OpenAPI } from 'sofa-api';
 import { GraphQLServer } from 'graphql-yoga';
 import { config } from 'dotenv';
-import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import swaggerUi from 'swagger-ui-express';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -66,7 +65,6 @@ const server = new GraphQLServer({
   schema,
   context,
 });
-server.express.options('*', cors());
 
 server.express.use(
   '/api',
@@ -93,15 +91,8 @@ server.express.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument),
 );
-const opts = {
-  cors: {
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  },
-};
-server.start(opts, () =>
+
+server.start(() =>
   // eslint-disable-next-line no-console
   console.log('Server is running on http://localhost:4000'),
 );
