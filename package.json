@@ -6,23 +6,16 @@
   "dependencies": {
     "@babel/runtime": "^7.6.3",
     "bcrypt": "^3.0.6",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
     "graphql-yoga": "^1.18.3",
     "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^2.2.0",
     "nexus": "^0.12.0-rc.4",
     "nexus-prisma": "^0.5.2",
     "nodemailer": "^6.3.1",
     "nodemailer-mailgun-transport": "^1.4.0",
     "nodemailer-smtp-transport": "^2.7.4",
     "path": "^0.12.7",
-    "pg": "^7.12.1",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.1",
-    "sequelize-cli": "^5.5.1",
+    "prisma2": "^2.0.0-preview016.2",
     "sofa-api": "^0.6.0",
     "swagger-ui-express": "^4.1.2"
   },
@@ -48,7 +41,6 @@
     "lint-staged": "^9.4.3",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
-    "prisma2": "2.0.0-preview016.2",
     "supertest": "^4.0.2"
   },
   "scripts": {
@@ -60,7 +52,7 @@
     "test:watch": "yarn pretest && yarn test:base --watch",
     "start:dev": "nodemon --exec babel-node src/app.js  --ignore swagger.json",
     "postinstall": "prisma2 generate",
-    "heroku-postbuild": "yarn migrate",
+    "heroku-postbuild": "babel src --out-dir dist && yarn migrate",
     "build": "babel src --out-dir dist",
     "start": "node dist/app.js",
     "lint": "eslint src/**/*.js --max-warnings 5"
