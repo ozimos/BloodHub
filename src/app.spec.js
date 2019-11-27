@@ -10,6 +10,7 @@ const photon = new Photon();
 const server = new ApolloServer({
   schema,
   context: { photon },
+  engine: { apiKey: '123' },
 });
 
 const testUser = {
@@ -26,7 +27,7 @@ describe('Auth Tests', () => {
     try {
       await photon.users.delete({ where: { email } });
     } catch (err) {
-      console.log('DB already migrated! Hurrah!!!');
+      console.log('Register User not in DB!!!');
     }
   });
 
@@ -51,7 +52,7 @@ describe('Auth Tests', () => {
 
     const res = await mutate({
       mutation: REGISTER_USER,
-      variables: { data: { ...testUser, password } },
+      variables: { data: testUser },
     });
     const { user, token } = res.data.userRegister;
     expect({ ...testUser, isDonor: false }).toMatchObject(user);
@@ -59,7 +60,7 @@ describe('Auth Tests', () => {
   });
 
   it('logs in an existing user', async () => {
-    const { email, donor, ...rest } = initialDonor;
+    const { email, ...rest } = initialDonor;
 
     const LOGIN_USER = gql`
       mutation userLogin($data: UserLoginInput!) {

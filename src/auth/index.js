@@ -1,6 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+function getToken(payload) {
+  const token = jwt.sign(payload, process.env.JWT_SECRET);
+  return `Bearer ${token}`;
+}
 export async function signIn(email, password, photon) {
   try {
     const {
@@ -17,7 +21,7 @@ export async function signIn(email, password, photon) {
       storedPassword,
     );
     if (validpass) {
-      const token = jwt.sign(user, process.env.JWT_SECRET);
+      const token = getToken(user);
       return {
         user,
         token,
@@ -51,7 +55,8 @@ export const register = async ({ password, ...data }, photon) => {
       data: { ...data, password: hash },
       include: { donor: true },
     });
-    const token = jwt.sign(user, process.env.JWT_SECRET);
+    const token = getToken(user);
+
     return {
       user,
       token,
