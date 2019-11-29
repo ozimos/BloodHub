@@ -34,7 +34,7 @@ enum Status {
 }
 
 model BloodRequest {
-  id Int @id
+  id String @id @default(cuid())
   requester User  @map("requesterId")
   bloodGroup BloodGroup
   hospital Hospital @map("hospitalId")
@@ -43,7 +43,7 @@ model BloodRequest {
   updatedAt DateTime @updatedAt
 }
 model Donor {
-  id Int @id
+  id String @id @default(cuid())
   user User @map("userId") @relation(references: [id])
   bloodGroup BloodGroup
   document String?
@@ -51,7 +51,7 @@ model Donor {
   updatedAt DateTime @updatedAt
 }
 model Hospital {
-  id Int @id
+  id String @id @default(cuid())
   name String
   street String
   lg String
@@ -61,7 +61,7 @@ model Hospital {
 }
 
 model User {
-  id        Int    @id
+  id String    @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   firstName     String

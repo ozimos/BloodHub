@@ -6,6 +6,11 @@ import { initialDonor } from './seedData';
 const photon = new Photon();
 
 async function main() {
+  const user = await photon.users.findOne({
+    where: { email: initialDonor.email },
+    select: { email: true },
+  });
+  if (user && user.email) return;
   await photon.users.create({ data: initialDonor });
 }
 if (process.env.CI) {

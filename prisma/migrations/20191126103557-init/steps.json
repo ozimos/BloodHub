@@ -34,7 +34,7 @@
       "stepType": "CreateField",
       "model": "BloodRequest",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "required"
     },
     {
@@ -42,6 +42,20 @@
       "model": "BloodRequest",
       "field": "id",
       "directive": "id"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "BloodRequest",
+      "field": "id",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "BloodRequest",
+      "field": "id",
+      "directive": "default",
+      "argument": "",
+      "value": "cuid()"
     },
     {
       "stepType": "CreateField",
@@ -141,7 +155,7 @@
       "stepType": "CreateField",
       "model": "Donor",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "required"
     },
     {
@@ -149,6 +163,20 @@
       "model": "Donor",
       "field": "id",
       "directive": "id"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Donor",
+      "field": "id",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "Donor",
+      "field": "id",
+      "directive": "default",
+      "argument": "",
+      "value": "cuid()"
     },
     {
       "stepType": "CreateField",
@@ -241,7 +269,7 @@
       "stepType": "CreateField",
       "model": "Hospital",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "required"
     },
     {
@@ -249,6 +277,20 @@
       "model": "Hospital",
       "field": "id",
       "directive": "id"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "Hospital",
+      "field": "id",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "Hospital",
+      "field": "id",
+      "directive": "default",
+      "argument": "",
+      "value": "cuid()"
     },
     {
       "stepType": "CreateField",
@@ -320,7 +362,7 @@
       "stepType": "CreateField",
       "model": "User",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "required"
     },
     {
@@ -328,6 +370,20 @@
       "model": "User",
       "field": "id",
       "directive": "id"
+    },
+    {
+      "stepType": "CreateDirective",
+      "model": "User",
+      "field": "id",
+      "directive": "default"
+    },
+    {
+      "stepType": "CreateDirectiveArgument",
+      "model": "User",
+      "field": "id",
+      "directive": "default",
+      "argument": "",
+      "value": "cuid()"
     },
     {
       "stepType": "CreateField",

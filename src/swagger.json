@@ -50,8 +50,7 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/ID"
             }
           },
           {
@@ -59,8 +58,7 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/ID"
             }
           },
           {
@@ -117,8 +115,7 @@
             "name": "after",
             "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/ID"
             }
           },
           {
@@ -126,8 +123,7 @@
             "name": "before",
             "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/ID"
             }
           },
           {
@@ -424,8 +420,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "email": {
             "type": "string"
@@ -452,8 +447,7 @@
             "type": "string"
           },
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "firstName": {
             "type": "string"
@@ -498,8 +492,7 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "user": {
             "$ref": "#/components/schemas/User"
@@ -531,8 +524,7 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "name": {
             "type": "string"
@@ -592,6 +584,9 @@
           "password"
         ],
         "properties": {
+          "id": {
+            "type": "object"
+          },
           "createdAt": {
             "type": "object"
           },
@@ -647,6 +642,9 @@
           "bloodGroup"
         ],
         "properties": {
+          "id": {
+            "type": "object"
+          },
           "bloodGroup": {
             "type": "object"
           },
@@ -665,8 +663,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           }
         }
       },
@@ -695,6 +692,9 @@
           "hospital"
         ],
         "properties": {
+          "id": {
+            "type": "object"
+          },
           "bloodGroup": {
             "type": "object"
           },
@@ -732,6 +732,9 @@
           "state"
         ],
         "properties": {
+          "id": {
+            "type": "object"
+          },
           "name": {
             "type": "string"
           },
@@ -756,8 +759,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           }
         }
       },
@@ -765,8 +767,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           }
         }
       },
@@ -777,6 +778,9 @@
           "user"
         ],
         "properties": {
+          "id": {
+            "type": "object"
+          },
           "bloodGroup": {
             "type": "object"
           },
@@ -814,6 +818,9 @@
           "password"
         ],
         "properties": {
+          "id": {
+            "type": "object"
+          },
           "createdAt": {
             "type": "object"
           },
@@ -853,8 +860,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "createdAt": {
             "type": "object"
@@ -921,8 +927,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "bloodGroup": {
             "type": "object"
@@ -1031,8 +1036,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "bloodGroup": {
             "type": "object"
@@ -1072,8 +1076,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "name": {
             "type": "string"
@@ -1163,46 +1166,47 @@
           }
         }
       },
-      "IntFilter": {
+      "StringFilter": {
         "type": "object",
         "properties": {
           "equals": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "not": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "in": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           },
           "notIn": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           },
           "lt": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "lte": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "gt": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "gte": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
+          },
+          "contains": {
+            "type": "string"
+          },
+          "startsWith": {
+            "type": "string"
+          },
+          "endsWith": {
+            "type": "string"
           }
         }
       },
@@ -1245,8 +1249,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "bloodGroup": {
             "type": "object"
@@ -1285,8 +1288,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "bloodGroup": {
             "type": "object"
@@ -1326,8 +1328,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "createdAt": {
             "type": "object"
@@ -1424,8 +1425,7 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "object"
           },
           "requester": {
             "$ref": "#/components/schemas/User"
