@@ -14,5 +14,6 @@ export default makeSchema({
       __dirname,
       '../node_modules/@types/nexus-typegen/index.d.ts',
     ),
+    schema: path.join(__dirname, 'app-schema.graphql'),
   },
 });
