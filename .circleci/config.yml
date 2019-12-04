@@ -7,18 +7,28 @@ executors:
             DB_URL: postgresql://root@localhost:5432/circle_test
       - image: circleci/postgres:9.6.5-alpine-ram
 jobs:
-  schema:
+  registerSchema:
     executor: my-executor
     steps:
       - attach_workspace:
             at: ~/
-      - run: sudo npm install --global apollo
       - run:
           name: Starting server
           command: yarn start:dev
           background: true
       - run: sleep 5
-      - run: apollo service:push --tag="${CIRCLE_BRANCH}"
+      - run: npx apollo service:push --tag="${CIRCLE_BRANCH}"
+  validateSchema:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+            at: ~/
+      - run:
+          name: Starting server
+          command: yarn start:dev
+          background: true
+      - run: sleep 5
+      - run: npx apollo service:check --tag=develop --markdown
   base:
     executor: my-executor
     steps:
@@ -53,7 +63,10 @@ workflows:
   main:
     jobs:
       - base
-      - schema:
+      - validateSchema:
+          requires:
+            - base
+      - registerSchema:
           filters:
             branches:
               only:
