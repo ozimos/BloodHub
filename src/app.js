@@ -64,6 +64,10 @@ async function context({ request }) {
 const server = new GraphQLServer({
   schema,
   context,
+  engine: {
+    apiKey: process.env.ENGINE_API_KEY,
+    schemaTag: 'develop',
+  },
 });
 
 server.express.use(
