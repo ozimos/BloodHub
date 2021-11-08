@@ -26,7 +26,7 @@
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
     "apollo": "^2.21.1",
-    "apollo-server": "^2.9.9",
+    "apollo-server": "^2.25.3",
     "apollo-server-testing": "^2.9.9",
     "cross-env": "^6.0.3",
     "eslint": "6.1.0",
